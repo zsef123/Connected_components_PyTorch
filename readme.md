@@ -9,4 +9,22 @@ References
 
 Follwing Block-based Union Find Algorithm from YACCLAB.
 
-I fixed the bit alignment problem in my env, refactoring through macros, and made the pytorch interface.
+ - Running on GPU.
+ - PyTorch Interface
+ - Fix some bit alignment problem
+ - little refactoring
+
+
+## Example
+
+Tested on [scikit-image example](https://scikit-image.org/docs/dev/auto_examples/segmentation/plot_label.html) ,follows [example.ipynb](example.ipynb)
+
+![img.png](https://user-images.githubusercontent.com/18730255/95699234-e60daa80-0c7e-11eb-9a1d-6059586c1899.png)
+
+## Install
+
+```
+> python3 setup.py install
+
+> python3 setup.py test
+```
