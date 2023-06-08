@@ -24,6 +24,6 @@ def connected_components_labeling(x, relabel=False):
         
     if relabel:
         vs, idxs = torch.unique(ret, return_inverse=True, sorted=True)
-        a = torch.arange(len(vs), device=vs.device)[idxs]
+        ret = torch.arange(len(vs), device=vs.device)[idxs]
         
     return ret
