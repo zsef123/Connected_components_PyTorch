@@ -31,6 +31,34 @@ class TestCC(unittest.TestCase):
 
         output = cc_torch.connected_components_labeling(img_2d)
         self.assertTrue((output == expected_output).all())
+        
+    def test_relabel(self):
+        img_2d = torch.tensor([
+            1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0,
+            1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0,
+            1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0,
+            1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,
+            0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0,
+            1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0], dtype=torch.uint8).reshape(12, 8).cuda()
+
+        expected_output = torch.tensor(
+            [[1,  1,  0,  1,  1,  1,  1,  1],
+             [0,  1,  1,  0,  1,  1,  1,  0],
+             [1,  1,  1,  0,  1,  1,  1,  0],
+             [1,  1,  0,  0,  0,  0,  0,  0],
+             [0,  1,  1,  0,  1,  0,  0,  2],
+             [0,  0,  0,  1,  0,  0,  2,  0],
+             [0,  0,  0,  0,  0,  0,  0,  0],
+             [0,  0,  0,  0,  0,  3,  0,  0],
+             [0,  0,  0,  0,  0,  3,  0,  0],
+             [0,  4,  0,  3,  3,  3,  3,  3],
+             [0,  4,  0,  0,  3,  3,  3,  0],
+             [0,  4,  0,  0,  3,  3,  3,  0]], dtype=torch.int32).cuda()
+
+        output = cc_torch.connected_components_labeling(img_2d)
+        self.assertTrue((output == expected_output).all())
 
     def test_3d(self):
         img_2d = torch.tensor([
