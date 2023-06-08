@@ -14,10 +14,8 @@ def connected_components_labeling(x, relabel=False):
         label (cuda.IntTensor)
     """
     if x.ndim == 2:
-        assert x.shape[0] % 2 == 0 and x.shape[1] % 2 == 0
         ret = _C.cc_2d(x)
     elif x.ndim == 3:
-        assert x.shape[0] % 2 == 0 and x.shape[1] % 2 == 0 and x.shape[2] % 2 == 0
         ret = _C.cc_3d(x)
     else:
         raise ValueError("x must be [H, W] or [D, H, W] shapes")
