@@ -57,7 +57,7 @@ class TestCC(unittest.TestCase):
              [0,  4,  0,  0,  3,  3,  3,  0],
              [0,  4,  0,  0,  3,  3,  3,  0]], dtype=torch.int32).cuda()
 
-        output = cc_torch.connected_components_labeling(img_2d)
+        output = cc_torch.connected_components_labeling(img_2d, relabel=True)
         self.assertTrue((output == expected_output).all())
 
     def test_3d(self):
